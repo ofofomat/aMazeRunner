@@ -17,10 +17,8 @@ class RobotFunctions{
   void setUpSensors();
   //Starts DC Motors
   void setUpWheels(int leftPower, int rightPower);
-  //Starts the bluetooth
-  void setUpHC05();
   //Starts the visor
-  void setUpSharp();
+  void getDistanceSharp();
   //Read raw sensor values
   void getRawSensors();
   //Read calibrated sensor values

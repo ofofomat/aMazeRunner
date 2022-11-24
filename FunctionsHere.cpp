@@ -10,23 +10,31 @@ uint16_t arrayOfSensor[]{A0,A1};            // for Raw values reading
 DCMotorController rightEngine = DCMotorController(4,6,7);  //Set pins for the engines (enable, in1, in2);
 DCMotorController leftEngine  = DCMotorController(5,2,3);  //Set pins for the engines (enable, in1, in2);
 
-
-// For the bluetooth only
-//SoftwareSerial HC(11,10);
+// For the Bluetooth only
+#define rxPin 10
+#define txPin 9
+SoftwareSerial HC(rxPin,txPin);
 
 // For the sharp ir sensor only
-
+SharpIR sensorsIV(SharpIR::GP2Y0A41SK0F, A2);
 
 
 //Functions per se
 
 void RobotFunctions::initializeBT(){
-//  HC.begin(9600);
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
+  digitalWrite(11, LOW);
+  digitalWrite(12, HIGH);
+  Serial.begin(9600);
+  pinMode(rxPin, INPUT);
+  pinMode(txPin, OUTPUT);
+  HC.begin(38400);
 }
 
 void RobotFunctions::setUpSensors(){
   reflector.setTypeAnalog();
-  reflector.setSensorPins((const uint8_t[]){A0, A1  }, sensorAmount);
+  reflector.setSensorPins((const uint8_t[]){A0, A1}, sensorAmount);
   for (uint16_t i=0;i<50;i++){
     reflector.calibrate();
     delay(10);
@@ -38,8 +46,8 @@ void RobotFunctions::setUpWheels(int leftPower, int rightPower){
   rightEngine.write(rightPower);
 }
 
-void RobotFunctions::setUpSharp(){
-  
+void RobotFunctions::getDistanceSharp(){
+  Serial.println(sensorsIV.getDistance());
 }
 
 void RobotFunctions::getRawSensors(){
