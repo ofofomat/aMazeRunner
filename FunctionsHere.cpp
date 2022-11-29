@@ -21,7 +21,7 @@ SharpIR sensorsIV(SharpIR::GP2Y0A41SK0F, A2);
 
 //Functions per se
 
-void RobotFunctions::initializeBT(){
+void RobotFunction::initializeBT(){
   pinMode(11, OUTPUT);
   pinMode(12, OUTPUT);
   digitalWrite(11, LOW);
@@ -32,7 +32,7 @@ void RobotFunctions::initializeBT(){
   HC.begin(38400);
 }
 
-void RobotFunctions::setUpSensors(){
+void RobotFunction::setUpSensors(){
   reflector.setTypeAnalog();
   reflector.setSensorPins((const uint8_t[]){A0, A1}, sensorAmount);
   for (uint16_t i=0;i<50;i++){
@@ -41,16 +41,16 @@ void RobotFunctions::setUpSensors(){
   }
 }
 
-void RobotFunctions::setUpWheels(int leftPower, int rightPower){
+void RobotFunction::setUpWheels(int leftPower, int rightPower){
   leftEngine.write(leftPower);
   rightEngine.write(rightPower);
 }
 
-void RobotFunctions::getDistanceSharp(){
+void RobotFunction::getDistanceSharp(){
   Serial.println(sensorsIV.getDistance());
 }
 
-void RobotFunctions::getRawSensors(){
+void RobotFunction::getRawSensors(){
   for(int i=0;i<sensorAmount;i++){
     // This sequence prints the sensor max values attatched to its sensor
     Serial.print(analogRead(arrayOfSensor[i])); 
@@ -60,9 +60,9 @@ void RobotFunctions::getRawSensors(){
   delay(1000);
 }
 
-void RobotFunctions::getCalibratedValues(){
+void RobotFunction::getCalibratedValues(){
   // receives position based on the position of sensor over the line
-  uint16_t position = reflector.readLineWhite(sensors); 
+  uint16_t position = reflector.readLineBlack(sensors); 
   for(uint8_t i=0;i<sensorAmount;i++){
     Serial.print(sensors[i]);
     Serial.print('\t');
@@ -71,7 +71,7 @@ void RobotFunctions::getCalibratedValues(){
   delay(250);
 }
 
-void RobotFunctions::testEngines(){
+void RobotFunction::testEngines(){
   //Goes forward
   while(millis()<2000){
     setUpWheels(200,200);

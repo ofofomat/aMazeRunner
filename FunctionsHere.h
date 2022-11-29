@@ -5,7 +5,7 @@
 #include "MotorController.h"
 #include "SharpIR.h"
 
-class RobotFunctions{
+class RobotFunction{
   //attributes
   public:
 

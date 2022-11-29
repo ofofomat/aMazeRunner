@@ -16,17 +16,17 @@
 //---------------------------------------------------------------------------------------------------------------------
 #include "FunctionsHere.h"
 
-RobotFunctions robotDoes;
+RobotFunction robotDoes;
 
 
 void setup() {
   robotDoes.initializeBT();
-//  robotDoes.setUpSensors();
+  robotDoes.setUpSensors();
 //  robotDoes.testEngines();
 }
 
 void loop() {  
 //  robotDoes.getRawSensors();
 //  robotDoes.getCalibratedValues();
-  robotDoes.getDistanceSharp();
+//  robotDoes.getDistanceSharp();
 }
