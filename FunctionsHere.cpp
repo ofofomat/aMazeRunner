@@ -11,9 +11,9 @@ DCMotorController rightEngine = DCMotorController(4,6,7);  //Set pins for the en
 DCMotorController leftEngine  = DCMotorController(5,2,3);  //Set pins for the engines (enable, in1, in2);
 
 // For the Bluetooth only
-#define rxPin 10
-#define txPin 9
-SoftwareSerial HC(rxPin,txPin);
+//#define rxPin 10
+//#define txPin 9
+//SoftwareSerial HC(rxPin,txPin);
 
 // For the sharp ir sensor only
 SharpIR sensorsIV(SharpIR::GP2Y0A41SK0F, A2);
@@ -21,16 +21,16 @@ SharpIR sensorsIV(SharpIR::GP2Y0A41SK0F, A2);
 
 //Functions per se
 
-void RobotFunction::initializeBT(){
-  pinMode(11, OUTPUT);
-  pinMode(12, OUTPUT);
-  digitalWrite(11, LOW);
-  digitalWrite(12, HIGH);
-  Serial.begin(9600);
-  pinMode(rxPin, INPUT);
-  pinMode(txPin, OUTPUT);
-  HC.begin(38400);
-}
+//void RobotFunction::initializeBT(){
+//  pinMode(11, OUTPUT);
+//  pinMode(12, OUTPUT);
+//  digitalWrite(11, LOW);
+//  digitalWrite(12, HIGH);
+//  Serial.begin(9600);
+//  pinMode(rxPin, INPUT);
+//  pinMode(txPin, OUTPUT);
+//  HC.begin(38400);
+//}
 
 void RobotFunction::setUpSensors(){
   reflector.setTypeAnalog();
