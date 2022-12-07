@@ -11,9 +11,9 @@ DCMotorController rightEngine = DCMotorController(4,6,7);  //Set pins for the en
 DCMotorController leftEngine  = DCMotorController(5,2,3);  //Set pins for the engines (enable, in1, in2);
 
 // For the Bluetooth only
-//#define rxPin 10
-//#define txPin 9
-//SoftwareSerial HC(rxPin,txPin);
+#define rxPin 10
+#define txPin 9
+SoftwareSerial HC(rxPin,txPin);
 
 // For the sharp ir sensor only
 SharpIR sensorsIV(SharpIR::GP2Y0A41SK0F, A2);
@@ -21,16 +21,12 @@ SharpIR sensorsIV(SharpIR::GP2Y0A41SK0F, A2);
 
 //Functions per se
 
-//void RobotFunction::initializeBT(){
-//  pinMode(11, OUTPUT);
-//  pinMode(12, OUTPUT);
-//  digitalWrite(11, LOW);
-//  digitalWrite(12, HIGH);
-//  Serial.begin(9600);
-//  pinMode(rxPin, INPUT);
-//  pinMode(txPin, OUTPUT);
-//  HC.begin(38400);
-//}
+void RobotFunction::initializeBT(){
+  Serial.begin(9600);
+  HC.begin(9600);
+  Serial.println("Initialized");
+  HC.println("Initialized");
+}
 
 void RobotFunction::setUpSensors(){
   reflector.setTypeAnalog();
@@ -46,8 +42,8 @@ void RobotFunction::setUpWheels(int leftPower, int rightPower){
   rightEngine.write(rightPower);
 }
 
-void RobotFunction::getDistanceSharp(){
-  Serial.println(sensorsIV.getDistance());
+int RobotFunction::getDistanceSharp(){
+  return sensorsIV.getDistance();
 }
 
 void RobotFunction::getRawSensors(){
@@ -73,23 +69,23 @@ void RobotFunction::getCalibratedValues(){
 
 void RobotFunction::testEngines(){
   //Goes forward
-  while(millis()<2000){
+  while(millis()<1000){
     setUpWheels(200,200);
   }
   //Goes backward
-  while(millis()<4000){
+  while(millis()<2000){
     setUpWheels(-200,-200);
   }
   //Goes right
-  while(millis()<6000){
+  while(millis()<3000){
     setUpWheels(200,-200);
   }
   //Goes left
-  while(millis()<8000){
+  while(millis()<4000){
     setUpWheels(-200,200);
   }
   //Stay still
-  while(millis()<10000){
+  while(millis()<5000){
     setUpWheels(0,0);
   }
 }

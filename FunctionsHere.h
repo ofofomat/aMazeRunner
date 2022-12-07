@@ -18,7 +18,7 @@ class RobotFunction{
   //Starts DC Motors
   void setUpWheels(int leftPower, int rightPower);
   //Starts the visor
-  void getDistanceSharp();
+  int getDistanceSharp();
   //Read raw sensor values
   void getRawSensors();
   //Read calibrated sensor values
