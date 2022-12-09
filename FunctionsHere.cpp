@@ -91,17 +91,74 @@ void RobotFunction::testEngines(){
 }
 
 void RobotFunction::turnLeft(){
-  unsigned long timer = millis();
-  unsigned long tempo = 100;
-  while(millis()<=timer+tempo){
-    setUpWheels(-210,140);
+  while(getDistanceSharp()<=4){
+    setUpWheels(-225,130);
   }
+  HC.println("Back on running!");
 }
 
 void RobotFunction::turnRight(){
-  unsigned long timer = millis();
-  unsigned long tempo = 100;
-  while(millis()<=timer+tempo){
-    setUpWheels(210,-140);
+  while(getDistanceSharp()<=4){
+    setUpWheels(225,-130);
   }
+  HC.println("Back on running!\n");
+}
+
+void RobotFunction::callToTurn(){
+  if(HC.available()>0){
+    char reader = HC.read();
+    switch(reader){
+      case 'l':
+        HC.println("You chose: Left");
+        turnLeft();
+        break;
+      case 'r':
+        HC.println("You chose: Right");
+        turnRight();
+        break;
+      case 'L':
+        HC.println("You chose: left");
+        oneLeft();
+        break;
+      case 'R':
+        HC.println("You chose: right");
+        oneRight();
+        break;
+    }
+  }
+}
+
+char RobotFunction::callToStart(){
+  char reader;
+  if(HC.available()>0){
+    reader = HC.read();
+  }
+  switch(reader){
+    case 's':
+    return reader;
+    break;
+    default:
+    return 'n';
+    break;
+  }
+}
+
+void RobotFunction::printHC(){
+  int value = getDistanceSharp();
+  HC.print("Value> ");
+  HC.println((String)value);
+}
+
+void RobotFunction::oneLeft(){
+  while(getDistanceSharp()<=4){
+    setUpWheels(-180,0);
+  }
+  HC.println("Back on running!\n");
+}
+
+void RobotFunction::oneRight(){
+  while(getDistanceSharp()<=4){
+    setUpWheels(0,-130);
+  }
+  HC.println("Back on running!\n");
 }

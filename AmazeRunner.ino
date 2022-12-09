@@ -16,8 +16,6 @@
 
 RobotFunction robotDoes;
 
-char switcher = '1';
-
 void setup() {
   robotDoes.initializeBT();
   robotDoes.setUpSensors();
@@ -28,27 +26,15 @@ void loop() {
     
 //  robotDoes.getRawSensors();
 //  robotDoes.getCalibratedValues();
-//  Serial.println(robotDoes.getDistanceSharp());
-//  switch(switcher){
-//    case 1:
-//      if(robotDoes.getDistanceSharp()<=4){
-//        robotDoes.setUpWheels(0,0);
-//        robotDoes.turnRight();
-//      }else{
-//        robotDoes.setUpWheels(140,210);
-//      }
-//      switcher = 2;
-//    case 2:
-//      if(robotDoes.getDistanceSharp()<=4){
-//        robotDoes.setUpWheels(0,0);
-//      }else{
-//        robotDoes.setUpWheels(140,210);
-//      }
-//  }
-  if(robotDoes.getDistanceSharp()<=4){
-    robotDoes.setUpWheels(0,0);
-    robotDoes.turnRight();
-  }else{
-    robotDoes.setUpWheels(210,140);
+//    robotDoes.printHC();
+  if(robotDoes.callToStart()=='s'){
+    if(robotDoes.getDistanceSharp()>=6){
+      robotDoes.setUpWheels(235,130);
+    }else{
+      if(robotDoes.getDistanceSharp()<=4){
+        robotDoes.setUpWheels(0,0);
+        robotDoes.callToTurn();
+      }
+    }
   }
 }

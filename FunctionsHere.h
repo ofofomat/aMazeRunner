@@ -29,5 +29,14 @@ class RobotFunction{
   void turnLeft();
   //
   void turnRight();
-
+  //Turns left and right accordingly
+  void callToTurn();
+  //Start the robot;
+  char callToStart();
+  //Print to the bluetooth
+  void printHC();
+  //turns only one wheel 
+  void oneLeft();
+  //turns only one wheel
+  void oneRight();
 };
