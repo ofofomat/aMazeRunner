@@ -89,3 +89,19 @@ void RobotFunction::testEngines(){
     setUpWheels(0,0);
   }
 }
+
+void RobotFunction::turnLeft(){
+  unsigned long timer = millis();
+  unsigned long tempo = 100;
+  while(millis()<=timer+tempo){
+    setUpWheels(-210,140);
+  }
+}
+
+void RobotFunction::turnRight(){
+  unsigned long timer = millis();
+  unsigned long tempo = 100;
+  while(millis()<=timer+tempo){
+    setUpWheels(210,-140);
+  }
+}

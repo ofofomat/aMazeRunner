@@ -26,5 +26,8 @@ class RobotFunction{
   //Tests motors
   void testEngines();
   //
+  void turnLeft();
+  //
+  void turnRight();
 
 };
